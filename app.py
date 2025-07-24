@@ -61,8 +61,15 @@ total_parking = st.number_input("**Total Parking Spaces**", 0, 10, value=default
 year = st.number_input("**Year Built**", 1800, 2025, value=default_values["year_built"])
 view = st.selectbox("**Has View?**", [False, True], index=int(default_values["view_yn"]))
 stories = st.number_input("**Stories**", 1, 4, value=default_values["stories"])
-levels_two = st.number_input("**Levels: Two**", 0, 1, value=default_values["levels_two"])
-levels_multisplit = st.number_input("**Levels: Multi-Split**", 0, 1, value=default_values["levels_multisplit"])
+if stories == 2:
+    levels_two = 1
+    levels_mutlisplit = 0
+elif stories >= 3:
+    levels_two = 0
+    levels_mutlisplit = 1
+else:
+    levels_two = 0
+    levels_mutlisplit = 0
 garage_attached = st.selectbox("**Attached Garage?**", [False, True], index=int(default_values["attached_garage_yn"]))
 new_const = st.selectbox("**New Construction?**", [False, True], index=int(default_values["new_construction_yn"]))
 
