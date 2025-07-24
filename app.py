@@ -31,7 +31,7 @@ default_values = {
 st.title("California Home Closing Price Predictor")
 st.write("**Note:** the following features are in order of *importance* for the machine learning model.")
 
-selected_model = st.selectbox("**Choose a prediction model", list(MODEL_OPTIONS.keys()), index="XGBoosting Regressor")
+selected_model = st.selectbox("**Choose a prediction model", list(MODEL_OPTIONS.keys()), index=0)
 model = joblib.load(MODEL_OPTIONS[selected_model])
 
 # inputs
