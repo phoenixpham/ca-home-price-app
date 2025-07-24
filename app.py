@@ -31,11 +31,11 @@ default_values = {
 st.title("California Home Closing Price Predictor")
 st.write("**Note:** the following features are in order of *importance* for the machine learning model.")
 
-st.subheader("**Select a prediction model**")
-selected_model = st.selectbox(options=list(MODEL_OPTIONS.keys()), index=0)
+st.subheader("**Machine Learning Model**")
+selected_model = st.selectbox("**Select a prediction model**", list(MODEL_OPTIONS.keys()), index=0)
 model = joblib.load(MODEL_OPTIONS[selected_model])
 
-st.subheader("**Input values**")
+st.subheader("**Input Values**")
 bathrooms = st.number_input("**Bathrooms**", 1, 10, step=1, value=default_values["bathrooms_total_integer"])
 
 st.write("Click on the map to choose a location")
