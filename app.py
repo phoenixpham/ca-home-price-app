@@ -63,13 +63,13 @@ view = st.selectbox("**Has View?**", [False, True], index=int(default_values["vi
 stories = st.number_input("**Stories**", 1, 4, value=default_values["stories"])
 if stories == 2:
     levels_two = 1
-    levels_mutlisplit = 0
+    levels_multisplit = 0
 elif stories >= 3:
     levels_two = 0
-    levels_mutlisplit = 1
+    levels_multisplit = 1
 else:
     levels_two = 0
-    levels_mutlisplit = 0
+    levels_multisplit = 0
 garage_attached = st.selectbox("**Attached Garage?**", [False, True], index=int(default_values["attached_garage_yn"]))
 new_const = st.selectbox("**New Construction?**", [False, True], index=int(default_values["new_construction_yn"]))
 
