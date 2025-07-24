@@ -5,7 +5,10 @@ import pandas as pd
 import numpy as np
 import joblib
 
-model = joblib.load("xgboosting-regressor.pkl")
+MODEL_OPTIONS = {
+    "XGBoosting Regressor": "xgboosting-regressor.pkl",
+    "(Baseline) Linear Regression": "linear-regressor.pkl"
+    }
 default_values = {
     "bathrooms_total_integer": 2,
     "bedrooms_total": 3,
@@ -27,6 +30,9 @@ default_values = {
 
 st.title("California Home Closing Price Predictor")
 st.write("**Note:** the following features are in order of *importance* for the machine learning model.")
+
+selected_model = st.selectbox("**Choose a prediction model", list(MODEL_OPTIONS.keys()), index="XGBoosting Regressor")
+model = joblib.load(MODEL_OPTIONS[selected_model])
 
 # inputs
 bathrooms = st.number_input("**Bathrooms**", 1, 10, step=1, value=default_values["bathrooms_total_integer"])
