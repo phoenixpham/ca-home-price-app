@@ -1,7 +1,7 @@
-streamlit
-streamlit-folium
-pandas
-numpy
-sklearn
-xgboost
-joblib
+streamlit>=1.30
+streamlit-folium>=0.14.0
+pandas>=1.3
+numpy>=1.21
+scikit-learn>=1.0
+xgboost>=1.6
+joblib>=1.2
