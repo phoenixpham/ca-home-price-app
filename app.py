@@ -10,10 +10,8 @@ st.title("California Home Closing Price Predictor")
 
 model = joblib.load("xgboosting-regressor.pkl")
 
-st.subheader("**Input Values**")
-st.write("**Note:** make sure every input is correct to the desired property to ensure accurate prediction.")
-
-address = st.text_input("**Property Address**", placeholder="[Street Number] [Street Name], [City], [State Abbreviation], [Country]")
+st.subheader("**Property Location**")
+address = st.text_input("**Insert Address**", placeholder="[Street Number] [Street Name], [City], [State Abbreviation], [Country]")
 latitude, longitude = None, None
 
 if address:
@@ -30,7 +28,7 @@ if address:
         st.error("There was an issue connecting to the geolocation service. Please try again.")
 
 if latitude is None or longitude is None:
-    st.write("Or click on the map to choose a location")
+    st.write("Or **click on the map** to choose a location")
     m = folium.Map(location=[34.05533869827761, -118.24253732680296], zoom_start=10)
     m.add_child(folium.LatLngPopup()) # enables click capture
     
@@ -39,6 +37,9 @@ if latitude is None or longitude is None:
         latitude = map_data["last_clicked"]["lat"]
         longitude = map_data["last_clicked"]["lng"]
     st.write(f"**Selected Coordinates**: ({latitude}, {longitude})")
+
+st.subheader("**Input Values**")
+st.write("**Note:** make sure every input is correct to the desired property to ensure accurate prediction.")
     
 bedrooms = st.number_input("**Bedrooms**", 0, 6, step=1)
 main_beds = st.number_input("**Main Level Bedrooms**", 0, 6)
