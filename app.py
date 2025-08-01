@@ -11,9 +11,7 @@ st.title("California Home Closing Price Predictor")
 model = joblib.load("xgboosting-regressor.pkl")
 
 st.subheader("**Input Values**")
-st.write("**Note:** the following features are in order of *importance* for the machine learning model XGBoosting.")
-
-bathrooms = st.number_input("**Bathrooms**", 1, 10, step=1)
+st.write("**Note:** make sure every input is correct to the desired property to ensure accurate prediction.")
 
 address = st.text_input("**Property Address**", placeholder="[Street Number] [Street Name], [City], [State Abbreviation], [Country]")
 latitude, longitude = None, None
@@ -27,7 +25,7 @@ if address:
             longitude = location.longitude
             st.success(f"Found coordinates: ({latitude}, {longitude})")
         else:
-            st.error("Address not found. Please try a different address.")
+            st.error("Address not found. Please try a different address or use the map.")
     except Exception:
         st.error("There was an issue connecting to the geolocation service. Please try again.")
 
@@ -41,23 +39,12 @@ if latitude is None or longitude is None:
         latitude = map_data["last_clicked"]["lat"]
         longitude = map_data["last_clicked"]["lng"]
     st.write(f"**Selected Coordinates**: ({latitude}, {longitude})")
-
-fireplace = st.selectbox("**Fireplace?**", [False, True])
     
 bedrooms = st.number_input("**Bedrooms**", 0, 6, step=1)
-
-pool = st.selectbox("**Private Pool?**", [False, True])
-    
-garage_spaces = st.number_input("**Garage Spaces**", 0, 6)
-
 main_beds = st.number_input("**Main Level Bedrooms**", 0, 6)
-    
-total_parking = st.number_input("**Total Parking Spaces**", 0, 10)
 
-year = st.number_input("**Year Built**", 1800, 2025)
-    
-view = st.selectbox("**Has View?**", [False, True])
-    
+bathrooms = st.number_input("**Bathrooms**", 1, 10, step=1)
+
 stories = st.number_input("**Stories**", 1, 4) 
 if stories == 2:
     levels_two = 1
@@ -68,12 +55,20 @@ elif stories >= 3:
 else:
     levels_two = 0
     levels_multisplit = 0
-    
+
+garage_spaces = st.number_input("**Garage Spaces**", 0, 6)
 garage_attached = st.selectbox("**Attached Garage?**", [False, True])
-    
+total_parking = st.number_input("**Total Parking Spaces**", 0, 10)
+
+year = st.number_input("**Year Built**", 1800, 2025)
 new_const = st.selectbox("**New Construction?**", [False, True])
 
+view = st.selectbox("**Has View?**", [False, True])
 
+pool = st.selectbox("**Private Pool?**", [False, True])
+
+fireplace = st.selectbox("**Fireplace?**", [False, True])
+        
 if st.button("Predict Price"):
     if latitude is None or longitude is None:
         st.error("You must provide either an address or select a location on the map.")
