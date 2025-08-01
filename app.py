@@ -36,10 +36,6 @@ if latitude is None or longitude is None:
     if map_data and map_data["last_clicked"]:
         latitude = map_data["last_clicked"]["lat"]
         longitude = map_data["last_clicked"]["lng"]
-
-if latitude is None or longitude is None:
-    st.error("You must provide either an address or select a location on the map.")
-else:
     st.write(f"**Selected Coordinates**: ({latitude}, {longitude})")
 
 fireplace = st.selectbox("**Fireplace?**", [False, True])
@@ -75,6 +71,10 @@ new_const = st.selectbox("**New Construction?**", [False, True])
 
 
 if st.button("Predict Price"):
+    if latitude is None or longitude is None:
+        st.error("You must provide either an address or select a location on the map.")
+        st.stop()
+        
     input_data = {
         "bathrooms_total_integer": bathrooms,
         "bedrooms_total": bedrooms,
