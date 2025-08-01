@@ -15,20 +15,24 @@ st.write("**Note:** the following features are in order of *importance* for the 
 
 bathrooms = st.number_input("**Bathrooms**", 1, 10, step=1)
 
-address = st.text_input("Enter Property Address (optional):", "")
+address = st.text_input("Enter Property Address:", placeholder="[Street Number] [Street Name], [City], [State Abbreviation], [Country]")
 latitude, longitude = None, None
 
 if address:
     geolocator = Nominatim(user_agent="idx_home_price_app")
-    location = geolocator.geocode(address)
-    if location:
-        latitude = location.latitude
-        longitude = location.longitude
-        st.success(f"Found coordinates: ({latitude}, {longitude})")
-    else:
-        st.error("Address not found. Please try a different address.")
+    try:
+        location = geolocator.geocode(address, timeout=10)
+        if location:
+            latitude = location.latitude
+            longitude = location.longitude
+            st.success(f"✅ Found coordinates: ({latitude}, {longitude})")
+        else:
+            st.error("Address not found. Please try a different address.")
+    except Exception:
+        st.error("There was an issue connecting to the geolocation service. Please try again.")
+
 if latitude is None or longitude is None:
-    st.write("Click on the map to choose a location")
+    st.write("Or click on the map to choose a location")
     m = folium.Map(location=[34.05533869827761, -118.24253732680296], zoom_start=10)
     m.add_child(folium.LatLngPopup()) # enables click capture
     
