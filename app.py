@@ -15,7 +15,7 @@ st.write("**Note:** the following features are in order of *importance* for the 
 
 bathrooms = st.number_input("**Bathrooms**", 1, 10, step=1)
 
-address = st.text_input("Enter Property Address:", placeholder="[Street Number] [Street Name], [City], [State Abbreviation], [Country]")
+address = st.text_input("**Property Address**", placeholder="[Street Number] [Street Name], [City], [State Abbreviation], [Country]")
 latitude, longitude = None, None
 
 if address:
@@ -25,7 +25,7 @@ if address:
         if location:
             latitude = location.latitude
             longitude = location.longitude
-            st.success(f"✅ Found coordinates: ({latitude}, {longitude})")
+            st.success(f"Found coordinates: ({latitude}, {longitude})")
         else:
             st.error("Address not found. Please try a different address.")
     except Exception:
