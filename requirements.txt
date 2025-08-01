@@ -2,7 +2,7 @@ streamlit
 streamlit-folium
 pandas
 numpy
-sklearn
+scikit-learn
 xgboost
 joblib
 geopy
